@@ -14,6 +14,22 @@ Follow the following guide:
 Make sure to select appropriate OS and to perform all steps till
 [Build the Blinky Sample](https://docs.zephyrproject.org/latest/develop/getting_started/index.html#build-the-blinky-sample).
 
+---
+
+## Environment Setup
+
+Before running any `west` command, activate the Python virtual environment
+(shared across workspaces):
+
+```bash
+source ~/IOMICO/zephyrproject/.venv/bin/activate
+```
+
+You'll know it's active when you see `(.venv)` at the start of your shell
+prompt. Required every time you open a new terminal session.
+
+---
+
 ## Task 1 — Notes (hardware-specific setup)
 
 My board is a Blue Pill clone with an **STM32F103C6T6** chip (32 KB Flash / 10 KB RAM),
