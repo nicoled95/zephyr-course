@@ -1,0 +1,20 @@
+/*
+ * Copyright (c) 2017, embedjournal.com
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+/ {
+	model = "STM32 Minimum Development Board (Blue Pill)";
+	compatible = "stm32_min_dev_blue", "st,stm32f103c8";
+
+	leds {
+		led: led {
+			gpios = <&gpioc 13 GPIO_ACTIVE_LOW>;
+		};
+	};
+};
+
+&sram0 {
+	reg = <0x20000000 DT_SIZE_K(10)>;
+};
