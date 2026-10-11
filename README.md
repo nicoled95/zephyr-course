@@ -1,4 +1,4 @@
-## Module 5 - Task 1:
+## Module 5 Custom Boards - Task 1:
 
 ```text
 Create a custom board using the "Copy/Rename" method
