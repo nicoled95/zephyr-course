@@ -51,7 +51,7 @@ list(APPEND BOARD_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/..")
 west build --board stm32_bluepill app -p
 ```
 
-### 4. Flash it
+### 6. Flash it
 ```bash
 st-flash --connect-under-reset --reset write build/zephyr/zephyr.bin 0x8000000
 ```

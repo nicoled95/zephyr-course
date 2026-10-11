@@ -1,0 +1,4 @@
+# STM32 Minimum Development Board Configuration [Blue Pill Custom]
+
+config BOARD_STM32_BLUEPILL
+	select SOC_STM32F103X8

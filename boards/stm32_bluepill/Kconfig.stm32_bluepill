@@ -1,0 +1,7 @@
+# STM32 Minimum Development Board Configuration [Blue Pill Custom]
+
+# Copyright (c) 2017, embedjournal.com
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD_STM32_BLUEPILL
+	select SOC_STM32F103X8
