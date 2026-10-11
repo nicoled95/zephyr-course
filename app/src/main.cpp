@@ -1,8 +1,10 @@
 #include <zephyr/drivers/gpio.h>
+#include <zephyr/init.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
+#include <zephyr/sys/printk.h>
 
-#define SLEEP_TIME_MS 1000
+#define SLEEP_TIME_MS 120
 
 /* The devicetree node identifier for the "led0" alias. */
 #define LED_NODE DT_ALIAS(led0)
@@ -10,6 +12,15 @@
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED_NODE, gpios);
 
 LOG_MODULE_REGISTER(main, LOG_LEVEL_INF);
+
+/* Runs after the kernel starts, before main() */
+static int board_initialized_msg(void)
+{
+	printk("Board Initialized\n");
+	return 0;
+}
+SYS_INIT(board_initialized_msg, POST_KERNEL, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT);
+
 
 int main(void)
 {
