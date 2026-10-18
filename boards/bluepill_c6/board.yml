@@ -1,0 +1,6 @@
+board:
+  name: bluepill_c6
+  full_name: STM32 BLUEPILL CLONE STM32F103C6T6
+  vendor: others
+  socs:
+    - name: stm32f103xb

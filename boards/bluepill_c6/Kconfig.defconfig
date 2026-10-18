@@ -1,0 +1,8 @@
+# STM32 BLUEPILL CLONE STM32F103C6T6
+
+if BOARD_BLUEPILL_C6
+
+config BOARD
+	default "bluepill_c6"
+
+endif # BOARD_BLUEPILL_C6
