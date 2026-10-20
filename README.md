@@ -54,3 +54,47 @@ Expected output:
 ```
 
 To exit minicom: `Ctrl-A`, then `Q`.
+
+
+## Module 6 – Task 2: Extension API for `my_driver`
+
+Adds a custom extension API function to the sensor driver that changes a
+parameter stored in the driver's dynamic data struct at runtime.
+
+### Summary of Steps
+
+1. **Header** (`app/drivers/my_driver/my_driver.h`): declares
+   `my_driver_set_inverted(dev, bool)`, wrapped in `extern "C"` so it can be
+   called from C++.
+2. **Dynamic data** (`my_driver.c`): a `struct my_driver_data` holds the
+   `inverted` parameter. It is allocated per instance through
+   `DEVICE_DT_INST_DEFINE`.
+3. **Extension API** (`my_driver.c`): `my_driver_set_inverted()` updates
+   `inverted`. All LED writes go through `my_driver_write_led()`, which reads
+   that parameter, so the change affects the LED immediately.
+4. **Build** (`app/drivers/my_driver/CMakeLists.txt`): adds the driver
+   directory as an include path so `main.cpp` can find the header.
+5. **Application** (`app/src/main.cpp`): after three cycles, calls
+   `my_driver_set_inverted(my_led, true)`, reversing the LED logic.
+
+### Build, Flash, and Monitor
+
+```bash
+source ~/IOMICO/.venv/bin/activate
+cd ~/IOMICO/zephyr-course
+west build -b bluepill_c6 app -p
+st-flash --connect-under-reset --reset write build/zephyr/zephyr.bin 0x8000000
+minicom -D /dev/ttyACM0 -b 115200   # power-cycle the board with minicom open
+```
+
+Expected output:
+
+```
+==DRIVER_INITIALIZED==
+sample_fetch ret=0      # LED ON (first 3 cycles)
+channel_get ret=0       # LED OFF
+...
+[00:00:06.000,000] <inf> my_driver: inverted = true
+[00:00:06.000,000] <inf> main: set_inverted ret=0
+# from here on: LED OFF on sample_fetch, LED ON on channel_get
+```
